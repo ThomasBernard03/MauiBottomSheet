@@ -23,9 +23,7 @@ jobs:
         
     - name: Install MAUI
       run: |
-        dotnet workload install maui --skip-manifest-update
-        dotnet workload install maui-android --skip-manifest-update
-        dotnet workload install maui-ios --skip-manifest-update
+        dotnet workload restore
         
     - name: Restore dependencies
       run: dotnet restore $PROJECT
