@@ -29,8 +29,18 @@
                 HorizontalOptions="Center" />
 
             <Button
+                Text="Open 3 size bottom sheet"
+                Clicked="Button_Clicked"
+                HorizontalOptions="Center" />
+
+            <Button
+                Text="Open large bottom sheet"
+                Clicked="Button_Clicked_1"
+                HorizontalOptions="Center" />
+
+            <Button
                 x:Name="CounterBtn"
-                Text="Click me"
+                Text="Open Medium expandable bottom sheet"
                 SemanticProperties.Hint="Counts the number of times you click"
                 Clicked="OnCounterClicked"
                 HorizontalOptions="Center" />

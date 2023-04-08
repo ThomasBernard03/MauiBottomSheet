@@ -34,6 +34,7 @@ public static class MauiProgram
     {
         mauiAppBuilder.Services.AddSingleton<MainPage>();
         mauiAppBuilder.Services.AddTransient<PurshaseBottomSheet>();
+        mauiAppBuilder.Services.AddTransient<NotAllowedBottomSheet>();
         mauiAppBuilder.Services.AddSingleton<IBottomSheetService, BottomSheetService>();
 
         return mauiAppBuilder;

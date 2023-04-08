@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Samples.Views.BottomSheet.NotAllowedBottomSheet">
+
+    <Grid
+        Padding="20"
+        RowDefinitions="*, *"
+        ColumnDefinitions="Auto, *">
+
+        <Image
+            HeightRequest="100"
+            WidthRequest="100"
+            Grid.RowSpan="2"
+            Source="error"/>
+
+        <Label
+            Grid.Column="1"
+            Text="You are not allowed to see this page !"/>
+
+        <Button
+            Grid.Row="1"
+            Grid.Column="1"
+            Text="Go back"
+            BackgroundColor="Red"
+            HorizontalOptions="EndAndExpand"
+            Clicked="Button_Clicked"/>
+
+    </Grid>
+</ContentView>
+

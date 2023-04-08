@@ -18,20 +18,11 @@ public partial class MainPage : ContentPage
 
 	private void OnCounterClicked(object sender, EventArgs e)
 	{
-		count++;
-
-		if (count == 1)
-			CounterBtn.Text = $"Clicked {count} time";
-		else
-			CounterBtn.Text = $"Clicked {count} times";
-
-		SemanticScreenReader.Announce(CounterBtn.Text);
-
 		var options = new BottomSheetOptions()
 		{
-			Radius = 0,
-			Detent = BottomSheetDetent.Large,
-			Detents = new List<BottomSheetDetent>() { BottomSheetDetent.Large, BottomSheetDetent.Small }
+			Radius = 24,
+			Detent = BottomSheetDetent.Small,
+			Detents = new List<BottomSheetDetent>() { BottomSheetDetent.Large, BottomSheetDetent.Medium }
 		};
 
 		var bottomSheet = _bottomSheetService.ShowBottomSheet<PurshaseBottomSheet>(options) ;
@@ -48,11 +39,34 @@ public partial class MainPage : ContentPage
 
         var options = new BottomSheetOptions()
         {
-            Radius = 24,
+            Radius = 0,
             Detent = BottomSheetDetent.Small,
+            Detents = new List<BottomSheetDetent>() { BottomSheetDetent.Small }
+        };
+
+        var bottomSheet = _bottomSheetService.ShowBottomSheet<NotAllowedBottomSheet>(options);
+    }
+
+    void Button_Clicked(System.Object sender, System.EventArgs e)
+    {
+        var options = new BottomSheetOptions()
+        {
+            Radius = 8,
+            Detent = BottomSheetDetent.Medium,
             Detents = new List<BottomSheetDetent>() { BottomSheetDetent.Small, BottomSheetDetent.Medium, BottomSheetDetent.Large }
         };
 
+        var bottomSheet = _bottomSheetService.ShowBottomSheet<PurshaseBottomSheet>(options);
+    }
+
+    void Button_Clicked_1(System.Object sender, System.EventArgs e)
+    {
+        var options = new BottomSheetOptions()
+        {
+            Radius = 24,
+            Detent = BottomSheetDetent.Large,
+            Detents = new List<BottomSheetDetent>() { BottomSheetDetent.Large }
+        };
 
         var bottomSheet = _bottomSheetService.ShowBottomSheet<PurshaseBottomSheet>(options);
     }
