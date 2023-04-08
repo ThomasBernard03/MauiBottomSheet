@@ -27,12 +27,17 @@ public partial class MainPage : ContentPage
 
 		SemanticScreenReader.Announce(CounterBtn.Text);
 
-		var bottomSheet = _bottomSheetService.ShowBottomSheet<PurshaseBottomSheet>(expandable:true);
+		var bottomSheet = _bottomSheetService.ShowBottomSheet<PurshaseBottomSheet>(true, true) ;
 
 
 		bottomSheet.OnClose(result =>
 		{
 			Console.WriteLine(result);
 		});
+    }
+
+    void NotAllowedButton_Clicked(System.Object sender, System.EventArgs e)
+    {
+		var bottomSheet = _bottomSheetService.ShowBottomSheet<PurshaseBottomSheet>(true, false);
     }
 }
