@@ -20,30 +20,57 @@ public class BottomSheetService : IBottomSheetService
         _serviceProvider = serviceProvider;
     }
 
-    public BottomSheet ShowBottomSheet<TView, TViewModel>(bool dismissable = true, bool expandable = false, object parameters = null) where TView : View where TViewModel : IBottomSheetRef
+    public BottomSheet ShowBottomSheet<TView, TViewModel>() where TView : View where TViewModel : IBottomSheetRef
     {
         var bottomSheetView = _serviceProvider.GetService<TView>();
         var viewModel = _serviceProvider.GetService<TViewModel>();
         bottomSheetView.BindingContext = viewModel;
 
         var viewControllerToPresent = GetViewControllerToPresent(bottomSheetView);
-        ConfigureSheet(viewControllerToPresent.SheetPresentationController, dismissable, expandable);
+        ConfigureSheet(viewControllerToPresent.SheetPresentationController, new BottomSheetOptions());
 
         PresentViewController(viewControllerToPresent);
 
-        return CreateBottomSheetInstance(viewControllerToPresent, viewModel, parameters);
+        return CreateBottomSheetInstance(viewControllerToPresent, viewModel);
     }
 
-    public BottomSheet ShowBottomSheet<TView>(bool dismissable = true, bool expandable = false, object parameters = null) where TView : View, IBottomSheetRef
+
+    public BottomSheet ShowBottomSheet<TView, TViewModel>(BottomSheetOptions options) where TView : View where TViewModel : IBottomSheetRef
+    {
+        var bottomSheetView = _serviceProvider.GetService<TView>();
+        var viewModel = _serviceProvider.GetService<TViewModel>();
+        bottomSheetView.BindingContext = viewModel;
+
+        var viewControllerToPresent = GetViewControllerToPresent(bottomSheetView);
+        ConfigureSheet(viewControllerToPresent.SheetPresentationController, options);
+
+        PresentViewController(viewControllerToPresent);
+
+        return CreateBottomSheetInstance(viewControllerToPresent, viewModel, options.Parameters);
+    }
+
+    public BottomSheet ShowBottomSheet<TView>() where TView : View, IBottomSheetRef
     {
         var bottomSheetView = _serviceProvider.GetService<TView>();
 
         var viewControllerToPresent = GetViewControllerToPresent(bottomSheetView);
-        ConfigureSheet(viewControllerToPresent.SheetPresentationController, dismissable, expandable);
+        ConfigureSheet(viewControllerToPresent.SheetPresentationController, new BottomSheetOptions());
 
         PresentViewController(viewControllerToPresent);
 
-        return CreateBottomSheetInstance(viewControllerToPresent, bottomSheetView, parameters);
+        return CreateBottomSheetInstance(viewControllerToPresent, bottomSheetView);
+    }
+
+    public BottomSheet ShowBottomSheet<TView>(BottomSheetOptions options) where TView : View, IBottomSheetRef
+    {
+        var bottomSheetView = _serviceProvider.GetService<TView>();
+
+        var viewControllerToPresent = GetViewControllerToPresent(bottomSheetView);
+        ConfigureSheet(viewControllerToPresent.SheetPresentationController, options);
+
+        PresentViewController(viewControllerToPresent);
+
+        return CreateBottomSheetInstance(viewControllerToPresent, bottomSheetView, options.Parameters);
     }
 
     private UIViewController GetViewControllerToPresent(View view)
@@ -53,15 +80,15 @@ public class BottomSheetService : IBottomSheetService
         return view.ToUIViewController(mauiContext);
     }
 
-    private void ConfigureSheet(UISheetPresentationController sheet, bool dismissable, bool expandable)
+    private void ConfigureSheet(UISheetPresentationController sheet, BottomSheetOptions options)
     {
         if (sheet is not null)
         {
-            sheet.Detents = expandable ? _detents : _detents.Take(1).ToArray();
+            sheet.Detents = options.Detents.Transform();
             sheet.PrefersScrollingExpandsWhenScrolledToEdge = false;
-            sheet.PrefersGrabberVisible = expandable;
-            sheet.PreferredCornerRadius = 24;
-            sheet.LargestUndimmedDetentIdentifier = dismissable ? UISheetPresentationControllerDetentIdentifier.Large : UISheetPresentationControllerDetentIdentifier.Medium;
+            sheet.PrefersGrabberVisible = options.Detents.Count() > 1;
+            sheet.PreferredCornerRadius = options.Radius;
+            //sheet.LargestUndimmedDetentIdentifier = dismissable ? UISheetPresentationControllerDetentIdentifier.Large : UISheetPresentationControllerDetentIdentifier.Medium;
         }
     }
 
@@ -74,7 +101,7 @@ public class BottomSheetService : IBottomSheetService
         viewController.PresentViewController(viewControllerToPresent, animated: true, null);
     }
 
-    private BottomSheet CreateBottomSheetInstance<T>(UIViewController viewController, T bottomSheetRef, object parameters) where T : IBottomSheetRef
+    private BottomSheet CreateBottomSheetInstance<T>(UIViewController viewController, T bottomSheetRef, object parameters = null) where T : IBottomSheetRef
     {
         var instance = new BottomSheet()
         {

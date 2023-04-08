@@ -75,5 +75,29 @@ public class BottomSheetService : IBottomSheetService
         bottomSheetDialog?.Dismiss();
         bottomSheet.Close(result);
     }
+
+    public BottomSheet ShowBottomSheet<TView, TViewModel>()
+        where TView : View
+        where TViewModel : IBottomSheetRef
+    {
+        throw new NotImplementedException();
+    }
+
+    public BottomSheet ShowBottomSheet<TView, TViewModel>(BottomSheetOptions options)
+        where TView : View
+        where TViewModel : IBottomSheetRef
+    {
+        throw new NotImplementedException();
+    }
+
+    public BottomSheet ShowBottomSheet<TView>() where TView : View, IBottomSheetRef
+    {
+        throw new NotImplementedException();
+    }
+
+    public BottomSheet ShowBottomSheet<TView>(BottomSheetOptions options) where TView : View, IBottomSheetRef
+    {
+        throw new NotImplementedException();
+    }
 }
 

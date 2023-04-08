@@ -27,7 +27,14 @@ public partial class MainPage : ContentPage
 
 		SemanticScreenReader.Announce(CounterBtn.Text);
 
-		var bottomSheet = _bottomSheetService.ShowBottomSheet<PurshaseBottomSheet>(true, true) ;
+		var options = new BottomSheetOptions()
+		{
+			Radius = 0,
+			Detent = BottomSheetDetent.Large,
+			Detents = new List<BottomSheetDetent>() { BottomSheetDetent.Large, BottomSheetDetent.Small }
+		};
+
+		var bottomSheet = _bottomSheetService.ShowBottomSheet<PurshaseBottomSheet>(options) ;
 
 
 		bottomSheet.OnClose(result =>
@@ -38,6 +45,15 @@ public partial class MainPage : ContentPage
 
     void NotAllowedButton_Clicked(System.Object sender, System.EventArgs e)
     {
-		var bottomSheet = _bottomSheetService.ShowBottomSheet<PurshaseBottomSheet>(true, false);
+
+        var options = new BottomSheetOptions()
+        {
+            Radius = 24,
+            Detent = BottomSheetDetent.Small,
+            Detents = new List<BottomSheetDetent>() { BottomSheetDetent.Small, BottomSheetDetent.Medium, BottomSheetDetent.Large }
+        };
+
+
+        var bottomSheet = _bottomSheetService.ShowBottomSheet<PurshaseBottomSheet>(options);
     }
 }
