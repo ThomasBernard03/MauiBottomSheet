@@ -1,4 +1,4 @@
-name: CI/CD-Package-Simple-Http
+name: CI/CD-MauiBottomSheet
 
 on:
   push:
@@ -20,6 +20,13 @@ jobs:
       uses: actions/setup-dotnet@v2
       with:
         dotnet-version: 6.0.x
+        
+    - name: Install MAUI
+      run: |
+        dotnet workload install maui --skip-manifest-update
+        dotnet workload install maui-android --skip-manifest-update
+        dotnet workload install maui-ios --skip-manifest-update
+        
     - name: Restore dependencies
       run: dotnet restore $PROJECT
     - name: Build
