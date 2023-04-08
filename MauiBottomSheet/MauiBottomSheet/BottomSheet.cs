@@ -14,4 +14,9 @@ public partial class BottomSheet
     public partial void Close(object result = null);
 
     public partial void OnClose(Action<object> callback);
+
+    public partial void Reduce();
+
+    public partial void Expand();
+
 }

@@ -18,6 +18,11 @@ public partial class PurshaseBottomSheet : ContentView, IBottomSheetRef
 
     void Button_Clicked(System.Object sender, System.EventArgs e)
     {
-        BottomSheetRef.Close("Buy");
+        BottomSheetRef.Expand();
+    }
+
+    void Button_Clicked_1(System.Object sender, System.EventArgs e)
+    {
+        BottomSheetRef.Reduce();
     }
 }

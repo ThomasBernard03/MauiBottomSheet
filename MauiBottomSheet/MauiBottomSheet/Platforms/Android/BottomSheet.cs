@@ -18,4 +18,14 @@ public partial class BottomSheet
     {
         _onCloseCallback = callback;
     }
+
+    public partial void Reduce()
+    {
+        throw new NotImplementedException("");
+    }
+
+    public partial void Expand()
+    {
+        throw new NotImplementedException("");
+    }
 }

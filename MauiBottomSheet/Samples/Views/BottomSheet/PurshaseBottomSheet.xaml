@@ -5,8 +5,14 @@
     <StackLayout>
 
         <Button
-            Text="Purshase"
+            Margin="50"
+            Text="Expand"
             Clicked="Button_Clicked"/>
+
+        <Button
+            Margin="50"
+            Text="Reduce"
+            Clicked="Button_Clicked_1"/>
     </StackLayout>
 </ContentView>
 
