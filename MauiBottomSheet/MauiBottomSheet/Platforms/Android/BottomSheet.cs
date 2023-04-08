@@ -11,7 +11,7 @@ public partial class BottomSheet
     {
         var bottomSheetDialog = View as BottomSheetDialog;
         bottomSheetDialog?.Dismiss();
-        Close(result);
+        _onCloseCallback?.Invoke(result);
     }
 
     public partial void OnClose(Action<object> callback)

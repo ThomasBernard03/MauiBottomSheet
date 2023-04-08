@@ -5,7 +5,7 @@ using Samples.Views.BottomSheet;
 #if IOS
 using MauiBottomSheet.Platforms.iOS;
 #elif ANDROID
-
+using MauiBottomSheet.Platforms.Droid;
 #endif
 
 namespace Samples;
@@ -33,7 +33,7 @@ public static class MauiProgram
     private static MauiAppBuilder RegisterViews(this MauiAppBuilder mauiAppBuilder)
     {
         mauiAppBuilder.Services.AddSingleton<MainPage>();
-        mauiAppBuilder.Services.AddSingleton<PurshaseBottomSheet>();
+        mauiAppBuilder.Services.AddTransient<PurshaseBottomSheet>();
         mauiAppBuilder.Services.AddSingleton<IBottomSheetService, BottomSheetService>();
 
         return mauiAppBuilder;
