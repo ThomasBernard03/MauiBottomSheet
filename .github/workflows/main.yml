@@ -1,0 +1,34 @@
+name: Build and Publish NuGet Package
+
+on:
+  push:
+    branches:
+      - main  # Remplacez par le nom de la branche que vous souhaitez déclencher le workflow
+
+jobs:
+  build_and_publish:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Setup .NET SDK
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 6.0.x  # Remplacez par la version SDK .NET requise pour votre projet
+
+    - name: Restore dependencies
+      run: dotnet restore
+
+    - name: Build
+      run: dotnet build --configuration Release --no-restore
+
+    - name: Publish NuGet Package
+      run: dotnet pack --configuration Release --no-build --output out
+
+    - name: Upload NuGet Package
+      uses: actions/upload-artifact@v2
+      with:
+        name: nuget-package
+        path: out/*.nupkg
