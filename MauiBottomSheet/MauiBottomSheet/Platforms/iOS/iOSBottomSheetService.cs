@@ -7,8 +7,10 @@ namespace MauiBottomSheet.Platforms.iOS;
 public class BottomSheetService : IBottomSheetService
 {
     private readonly IServiceProvider _serviceProvider;
-    private readonly UISheetPresentationControllerDetent[] _detents = new[]
+
+    private UISheetPresentationControllerDetent[] _detents = new[]
     {
+        UISheetPresentationControllerDetent.Create("small detent", sheet => 120),
         UISheetPresentationControllerDetent.CreateMediumDetent(),
         UISheetPresentationControllerDetent.CreateLargeDetent(),
     };
@@ -33,26 +35,18 @@ public class BottomSheetService : IBottomSheetService
         var sheet = viewControllerToPresent.SheetPresentationController;
         if (sheet is not null)
         {
-            if (expandable)
-            {
-                sheet.Detents = new[]
-                {
-                    UISheetPresentationControllerDetent.CreateMediumDetent(),
-                    UISheetPresentationControllerDetent.CreateLargeDetent(),
-                };
-            }
-            else
-            {
-                sheet.Detents = new[] {
-                    UISheetPresentationControllerDetent.CreateMediumDetent(),
-                };
-            }
+            // All bottom sheet properties : https://www.youtube.com/watch?v=oJU4RvZcxWo
 
-            sheet.LargestUndimmedDetentIdentifier = dimDismiss ? UISheetPresentationControllerDetentIdentifier.Unknown : UISheetPresentationControllerDetentIdentifier.Medium;
-            sheet.PrefersScrollingExpandsWhenScrolledToEdge = false;
-            sheet.PrefersEdgeAttachedInCompactHeight = true;
-            sheet.WidthFollowsPreferredContentSizeWhenEdgeAttached = true;
+            sheet.Detents = expandable ? _detents : _detents.Take(1).ToArray(); // Control all detents of bottom sheet large or medium
+            sheet.PrefersScrollingExpandsWhenScrolledToEdge = false; // Can scrool in bottom sheet view
+            sheet.PrefersGrabberVisible = expandable; // Add top indicator in bottom sheet
+            sheet.PreferredCornerRadius = 24; // Corner raduis of our bottom sheet
+            sheet.LargestUndimmedDetentIdentifier = dimDismiss ? UISheetPresentationControllerDetentIdentifier.Unknown : UISheetPresentationControllerDetentIdentifier.Medium; // Can close outside to close bottom sheet
 
+
+
+            //sheet.PrefersEdgeAttachedInCompactHeight = false; // Must test this property
+            //sheet.WidthFollowsPreferredContentSizeWhenEdgeAttached = true; // Must test this property
         }
 
         viewController.PresentViewController(viewControllerToPresent, animated: true, null);
@@ -82,21 +76,16 @@ public class BottomSheetService : IBottomSheetService
         {
             // All bottom sheet properties : https://www.youtube.com/watch?v=oJU4RvZcxWo
 
-            sheet.Detents = _detents; // Control all detents of bottom sheet large or medium
+            sheet.Detents = expandable ? _detents : _detents.Take(1).ToArray(); // Control all detents of bottom sheet large or medium
             sheet.PrefersScrollingExpandsWhenScrolledToEdge = false; // Can scrool in bottom sheet view
-            sheet.PrefersGrabberVisible = true; // Add top indicator in bottom sheet
+            sheet.PrefersGrabberVisible = expandable; // Add top indicator in bottom sheet
             sheet.PreferredCornerRadius = 24; // Corner raduis of our bottom sheet
-            sheet.LargestUndimmedDetentIdentifier = UISheetPresentationControllerDetentIdentifier.Unknown; // Can close outside to close bottom sheet
+            sheet.LargestUndimmedDetentIdentifier = dimDismiss ? UISheetPresentationControllerDetentIdentifier.Unknown : UISheetPresentationControllerDetentIdentifier.Medium; // Can close outside to close bottom sheet
 
 
 
-            //sheet.LargestUndimmedDetentIdentifier = dimDismiss ? UISheetPresentationControllerDetentIdentifier.Large : UISheetPresentationControllerDetentIdentifier.Medium;
-            //sheet.PrefersScrollingExpandsWhenScrolledToEdge = false;
-            //sheet.PrefersEdgeAttachedInCompactHeight = true;
-            //sheet.WidthFollowsPreferredContentSizeWhenEdgeAttached = true;
-            //sheet.PrefersGrabberVisible = true;
-            //sheet.PreferredCornerRadius = 24;
-
+            //sheet.PrefersEdgeAttachedInCompactHeight = false; // Must test this property
+            //sheet.WidthFollowsPreferredContentSizeWhenEdgeAttached = true; // Must test this property
         }
 
         viewController.PresentViewController(viewControllerToPresent, animated: true, null);

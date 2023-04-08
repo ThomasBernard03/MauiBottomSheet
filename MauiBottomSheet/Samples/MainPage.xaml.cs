@@ -27,7 +27,7 @@ public partial class MainPage : ContentPage
 
 		SemanticScreenReader.Announce(CounterBtn.Text);
 
-		var bottomSheet = _bottomSheetService.ShowBottomSheet<PurshaseBottomSheet>();
+		var bottomSheet = _bottomSheetService.ShowBottomSheet<PurshaseBottomSheet>(expandable:true);
 
 
 		bottomSheet.OnClose(result =>
