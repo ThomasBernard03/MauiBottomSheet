@@ -9,7 +9,7 @@ jobs:
   
     env:
       BUILD_CONFIG: 'Release'
-      PROJECT: './MauiBottomSheet/MauiBottomSheet/MauiBottomSheet.csproj'
+      PROJECT: './MauiBottomSheet/MauiBottomSheet/Simple.MauiBottomSheet.csproj'
   
 
     runs-on: macOS-latest
