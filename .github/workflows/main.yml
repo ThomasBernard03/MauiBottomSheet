@@ -23,7 +23,7 @@ jobs:
         
     - name: Install MAUI
       run: |
-        dotnet workload restore
+        dotnet workload restore --project $PROJECT
         
     - name: Restore dependencies
       run: dotnet restore $PROJECT
