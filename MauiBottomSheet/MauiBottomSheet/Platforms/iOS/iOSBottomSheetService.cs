@@ -63,6 +63,53 @@ public class BottomSheetService : IBottomSheetService
         return instance;
     }
 
+    public BottomSheet ShowBottomSheet<TView>(bool dimDismiss = true, bool expandable = false, object parameters = null) where TView : View, IBottomSheetRef
+    {
+        var bottomSheetView = _serviceProvider.GetService<TView>();
+
+        var page = Application.Current.MainPage;
+        var mauiContext = page.Handler?.MauiContext ?? throw new Exception("MauiContext is null");
+        var viewController = page.ToUIViewController(mauiContext);
+        var viewControllerToPresent = bottomSheetView.ToUIViewController(mauiContext);
+
+        var sheet = viewControllerToPresent.SheetPresentationController;
+        if (sheet is not null)
+        {
+            if (expandable)
+            {
+                sheet.Detents = new[]
+                {
+                    UISheetPresentationControllerDetent.CreateMediumDetent(),
+                    UISheetPresentationControllerDetent.CreateLargeDetent(),
+                };
+            }
+            else
+            {
+                sheet.Detents = new[] {
+                    UISheetPresentationControllerDetent.CreateMediumDetent(),
+                };
+            }
+
+            sheet.LargestUndimmedDetentIdentifier = dimDismiss ? UISheetPresentationControllerDetentIdentifier.Unknown : UISheetPresentationControllerDetentIdentifier.Medium;
+            sheet.PrefersScrollingExpandsWhenScrolledToEdge = false;
+            sheet.PrefersEdgeAttachedInCompactHeight = true;
+            sheet.WidthFollowsPreferredContentSizeWhenEdgeAttached = true;
+
+        }
+
+        viewController.PresentViewController(viewControllerToPresent, animated: true, null);
+
+        var instance = new BottomSheet()
+        {
+            View = viewControllerToPresent
+        };
+
+        bottomSheetView.BottomSheetRef = instance;
+        bottomSheetView.OnAppearing(parameters);
+
+        return instance;
+    }
+
     public void CloseBottomSheet(object result = null)
     {
         var bottomSheet = UIApplication.SharedApplication.KeyWindow.RootViewController;

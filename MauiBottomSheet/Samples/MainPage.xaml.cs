@@ -1,13 +1,20 @@
-﻿namespace Samples;
+﻿using MauiBottomSheet;
+using Microsoft.Extensions.DependencyInjection;
+using Samples.Views.BottomSheet;
+
+namespace Samples;
 
 public partial class MainPage : ContentPage
 {
 	int count = 0;
 
-	public MainPage()
+	private readonly IBottomSheetService _bottomSheetService;
+
+	public MainPage(IBottomSheetService bottomSheetService)
 	{
 		InitializeComponent();
-	}
+		_bottomSheetService = bottomSheetService;
+    }
 
 	private void OnCounterClicked(object sender, EventArgs e)
 	{
@@ -19,5 +26,13 @@ public partial class MainPage : ContentPage
 			CounterBtn.Text = $"Clicked {count} times";
 
 		SemanticScreenReader.Announce(CounterBtn.Text);
-	}
+
+		var bottomSheet = _bottomSheetService.ShowBottomSheet<PurshaseBottomSheet>();
+
+
+		bottomSheet.OnClose(result =>
+		{
+			Console.WriteLine(result);
+		});
+    }
 }

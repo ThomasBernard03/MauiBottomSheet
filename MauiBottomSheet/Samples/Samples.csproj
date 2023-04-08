@@ -54,9 +54,13 @@
 	<ItemGroup>
 	  <None Remove="Views\" />
 	  <None Remove="Views\Pages\" />
+	  <None Remove="Views\BottomSheet\" />
+	  <None Remove="ViewModels\" />
 	</ItemGroup>
 	<ItemGroup>
 	  <Folder Include="Views\" />
 	  <Folder Include="Views\Pages\" />
+	  <Folder Include="Views\BottomSheet\" />
+	  <Folder Include="ViewModels\" />
 	</ItemGroup>
 </Project>

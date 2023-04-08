@@ -1,4 +1,12 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using MauiBottomSheet;
+using Microsoft.Extensions.Logging;
+using Samples.Views.BottomSheet;
+
+#if IOS
+using MauiBottomSheet.Platforms.iOS;
+#elif ANDROID
+
+#endif
 
 namespace Samples;
 
@@ -13,7 +21,7 @@ public static class MauiProgram
 			{
 				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
 				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
-			});
+			}).RegisterViews();
 
 #if DEBUG
 		builder.Logging.AddDebug();
@@ -21,5 +29,14 @@ public static class MauiProgram
 
 		return builder.Build();
 	}
+
+    private static MauiAppBuilder RegisterViews(this MauiAppBuilder mauiAppBuilder)
+    {
+        mauiAppBuilder.Services.AddSingleton<MainPage>();
+        mauiAppBuilder.Services.AddSingleton<PurshaseBottomSheet>();
+        mauiAppBuilder.Services.AddSingleton<IBottomSheetService, BottomSheetService>();
+
+        return mauiAppBuilder;
+    }
 }
 
