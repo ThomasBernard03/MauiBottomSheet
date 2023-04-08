@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 25.0.1705.2
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MauiBottomSheet", "MauiBottomSheet\MauiBottomSheet.csproj", "{3FEF73FC-8824-4B16-B224-7922AA6CAE5B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Simple.MauiBottomSheet", "MauiBottomSheet\Simple.MauiBottomSheet.csproj", "{3FEF73FC-8824-4B16-B224-7922AA6CAE5B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Samples", "Samples\Samples.csproj", "{21764EC6-F6BB-4806-B627-25DDDD4784DB}"
 EndProject
