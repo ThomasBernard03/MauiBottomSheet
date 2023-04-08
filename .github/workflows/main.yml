@@ -1,34 +1,30 @@
-name: Build and Publish NuGet Package
+name: CI/CD-Package-Simple-Http
 
 on:
   push:
-    branches:
-      - main  # Remplacez par le nom de la branche que vous souhaitez déclencher le workflow
+    branches: [ "main" ]
 
 jobs:
-  build_and_publish:
-    runs-on: windows-latest
+  build:
+  
+    env:
+      BUILD_CONFIG: 'Release'
+      PROJECT: './MauiBottomSheet/MauiBottomSheet/MauiBottomSheet.csproj'
+  
+
+    runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
-
-    - name: Setup .NET SDK
-      uses: actions/setup-dotnet@v1
+    - uses: actions/checkout@v3
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v2
       with:
-        dotnet-version: 6.0.x  # Remplacez par la version SDK .NET requise pour votre projet
-
+        dotnet-version: 6.0.x
     - name: Restore dependencies
-      run: dotnet restore
-
+      run: dotnet restore $PROJECT
     - name: Build
-      run: dotnet build --configuration Release --no-restore
-
-    - name: Publish NuGet Package
-      run: dotnet pack --configuration Release --no-build --output out
-
-    - name: Upload NuGet Package
-      uses: actions/upload-artifact@v2
-      with:
-        name: nuget-package
-        path: out/*.nupkg
+      run: dotnet build $PROJECT --configuration $BUILD_CONFIG --no-restore
+    - name : Tests
+      run: dotnet test $PROJECT
+    - name: Publish
+      run: nuget push **\*.nupkg -Source 'https://api.nuget.org/v3/index.json' -ApiKey ${{secrets.NUGET_API_KEY}} -SkipDuplicate -NoSymbols 
