@@ -12,7 +12,7 @@ jobs:
       PROJECT: './MauiBottomSheet/MauiBottomSheet/MauiBottomSheet.csproj'
   
 
-    runs-on: ubuntu-latest
+    runs-on: macOS-latest
 
     steps:
     - uses: actions/checkout@v3
