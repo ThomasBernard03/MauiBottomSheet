@@ -7,7 +7,11 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Authors>ThomasBernard</Authors>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-		<Version>1.0.2</Version>
+		<Version>1.0.3</Version>
+		<PackageIconUrl>https://raw.githubusercontent.com/ThomasBernard03/MauiBottomSheet/main/Images/MauiBottomSheetLogo.png</PackageIconUrl>
+		<PackageProjectUrl>https://github.com/ThomasBernard03/MauiBottomSheet</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/ThomasBernard03/MauiBottomSheet</RepositoryUrl>
+		<Description>A package to display and manage native bottom sheets on .NET MAUI</Description>
 
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">14.2</SupportedOSPlatformVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">21.0</SupportedOSPlatformVersion>
