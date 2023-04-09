@@ -20,7 +20,7 @@ You can install the latest version of the package with the command
 ```shell
 dotnet add package Simple.BottomSheet
 ```
-You can also install it manualy in your IDE with the nuget package manager by searching Simple.Http.
+You can also install it manualy in your IDE with the nuget package manager by searching Simple.BottomSheet.
 
 
 ## Configuration
