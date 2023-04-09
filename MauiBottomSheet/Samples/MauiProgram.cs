@@ -1,6 +1,7 @@
 ﻿using MauiBottomSheet;
 using Microsoft.Extensions.Logging;
 using Samples.Views.BottomSheet;
+using Simple.MauiBottomSheet;
 
 #if IOS
 using MauiBottomSheet.Platforms.iOS;
@@ -17,6 +18,7 @@ public static class MauiProgram
 		var builder = MauiApp.CreateBuilder();
 		builder
 			.UseMauiApp<App>()
+			.UseBottomSheet()
 			.ConfigureFonts(fonts =>
 			{
 				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
@@ -33,9 +35,8 @@ public static class MauiProgram
     private static MauiAppBuilder RegisterViews(this MauiAppBuilder mauiAppBuilder)
     {
         mauiAppBuilder.Services.AddSingleton<MainPage>();
-        mauiAppBuilder.Services.AddTransient<PurshaseBottomSheet>();
-        mauiAppBuilder.Services.AddTransient<NotAllowedBottomSheet>();
-        mauiAppBuilder.Services.AddSingleton<IBottomSheetService, BottomSheetService>();
+        mauiAppBuilder.Services.AddTransient<PurshaseBottomSheet>(); // Pages must be registered as transient
+        mauiAppBuilder.Services.AddTransient<NotAllowedBottomSheet>(); // Pages must be registered as transient
 
         return mauiAppBuilder;
     }
