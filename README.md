@@ -28,8 +28,51 @@ You can also install it manualy in your IDE with the nuget package manager by se
 
 ## Utilisation
 
+To use a bottom sheet you must proceed as follows:
 
 
+1) Create your page (Your page must inherit IBottomSheetRef) :
+```csharp
+public partial class PurshaseBottomSheet : ContentView, IBottomSheetRef
+{
+  public BottomSheet BottomSheetRef { get; set; }
+
+  public PurshaseBottomSheet()
+  {
+      InitializeComponent();
+  }
+
+  public void OnAppearing(object parameters){ }
+}
+```
+
+
+2) Register your page (and viewmodel if you use one) in your IOC container :
+
+```csharp
+mauiAppBuilder.Services.AddTransient<PurshaseBottomSheet>(); // Pages must be registered as transient
+```
+
+
+3) Inject IBottomSheetService into your page our viewmodel :
+
+```csharp
+public MainPage(IBottomSheetService bottomSheetService)
+{
+    InitializeComponent();
+    _bottomSheetService = bottomSheetService;
+}
+```
+
+
+4) Use it !
+
+```csharp
+void Button_Clicked(System.Object sender, System.EventArgs e)
+{
+    var bottomSheet = _bottomSheetService.ShowBottomSheet<PurshaseBottomSheet>();
+}
+```
 
 
 ## Other
