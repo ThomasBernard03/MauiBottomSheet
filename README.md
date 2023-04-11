@@ -9,7 +9,7 @@
 [![forthebadge](https://img.shields.io/nuget/dt/Simple.MauiBottomSheet)](https://www.nuget.org/packages/Simple.MauiBottomSheet/)
 
 
-## Presentation 💿
+## Presentation 
 
 
 
@@ -17,7 +17,7 @@ https://user-images.githubusercontent.com/67638928/230773903-92f329cd-daa0-4d9b-
 
 
 
-## Installation
+## Installation 💿
 
 
 You can install the latest version of the package with the command 
