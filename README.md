@@ -39,6 +39,19 @@ You can also install it manualy in your IDE with the nuget package manager by se
 
 ## Configuration
 
+Add UseBottomSheet() in your MAUI builder :
+
+```csharp
+public static MauiApp CreateMauiApp()
+{
+    var builder = MauiApp.CreateBuilder();
+    builder
+      .UseMauiApp<App>()
+      .UseBottomSheet(); // Add UseBottomSheet
+    return builder.Build();
+}
+```
+      
 
 ## Utilisation
 
