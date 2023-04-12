@@ -13,6 +13,9 @@
   <a href="https://www.nuget.org/packages/Simple.MauiBottomSheet/">
     <img src="https://img.shields.io/nuget/dt/Simple.MauiBottomSheet" alt="forthebadge">
   </a>
+   <a href="https://www.nuget.org/packages/Simple.MauiBottomSheet/">
+    <img src="https://img.shields.io/github/last-commit/thomasbernard03/MauiBottomSheet" alt="forthebadge">
+  </a>
 </p>
 
 
