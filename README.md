@@ -37,7 +37,7 @@ dotnet add package Simple.BottomSheet
 You can also install it manualy in your IDE with the nuget package manager by searching Simple.BottomSheet.
 
 
-## Configuration
+## Configuration ⚙️
 
 Add UseBottomSheet() in your MAUI builder :
 
@@ -102,6 +102,6 @@ void Button_Clicked(System.Object sender, System.EventArgs e)
 ```
 
 
-## Other
+## Other 
 
 Feel free to contribute to this project by proposing features and pull requests !
