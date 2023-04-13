@@ -53,7 +53,7 @@ public static MauiApp CreateMauiApp()
 ```
       
 
-## Utilisation
+## Utilisation 🚀
 
 To use a bottom sheet you must proceed as follows:
 
