@@ -92,7 +92,7 @@ public MainPage(IBottomSheetService bottomSheetService)
 ```
 
 
-4) Use it !
+4) Use it ! ⌨️
 
 ```csharp
 void Button_Clicked(System.Object sender, System.EventArgs e)
