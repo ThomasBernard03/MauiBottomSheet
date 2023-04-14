@@ -102,6 +102,6 @@ void Button_Clicked(System.Object sender, System.EventArgs e)
 ```
 
 
-## Other 
+## Other 🎈
 
 Feel free to contribute to this project by proposing features and pull requests !
