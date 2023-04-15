@@ -81,7 +81,7 @@ mauiAppBuilder.Services.AddTransient<PurshaseBottomSheet>(); // Pages must be re
 ```
 
 
-3) Inject IBottomSheetService into your page our viewmodel :
+3) Inject IBottomSheetService into your page or viewmodel :
 
 ```csharp
 public MainPage(IBottomSheetService bottomSheetService)
