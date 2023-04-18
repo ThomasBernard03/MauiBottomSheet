@@ -30,7 +30,7 @@ https://user-images.githubusercontent.com/67638928/230773903-92f329cd-daa0-4d9b-
 ## Installation 💿
 
 
-You can install the latest version of the package with the command 
+You can install the latest version of the package with this command 
 ```shell
 dotnet add package Simple.BottomSheet
 ```
